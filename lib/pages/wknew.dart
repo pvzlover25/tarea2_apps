@@ -52,7 +52,7 @@ class _NuevoWakalaState extends State<NuevoWakala> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Seleccione"),
+          title: const Text("Seleccionar"),
           content: SingleChildScrollView(
             child: ListBody(
               children:[
@@ -81,7 +81,7 @@ class _NuevoWakalaState extends State<NuevoWakala> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Seleccione"),
+          title: const Text("Seleccionar"),
           content: SingleChildScrollView(
             child: ListBody(
               children:[
