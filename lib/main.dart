@@ -1,5 +1,4 @@
 import 'package:evaluacion_2/pages/login.dart';
-import 'package:evaluacion_2/pages/wklist.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,10 +18,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      //home: const WakalaDetail(idLocation: 9,),
-      //home: const WakalaList(userId: 10,),
-      //home: const Comment()
-      //home: const NuevoWakala()
       home: const Login()
     );
   }
