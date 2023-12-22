@@ -1,3 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:evaluacion_2/infraestructure/models/comments.dart';
 import 'package:evaluacion_2/infraestructure/models/detailsLocation.dart';
@@ -21,6 +26,9 @@ class _WakalaDetailState extends State<WakalaDetail> {
     int? counterStillThere;
     int? counterNotStillThere;
 
+    String base64Image1 = "";
+    String base64Image2 = "";
+
     _WakalaDetailState({required this.idLocation, required this.idUser});
 
     @override
@@ -37,6 +45,8 @@ class _WakalaDetailState extends State<WakalaDetail> {
                 detLocation = detailsLocation.listFromJson(response.data);
                 counterStillThere = detLocation?[0].stillThere;
                 counterNotStillThere = detLocation?[0].notStillThere;
+                base64Image1 = detLocation![0].photo1;
+                base64Image2 = detLocation![0].photo2;
             });
         } catch (error) {
             print('Error fetching locations: $error');
@@ -63,6 +73,18 @@ class _WakalaDetailState extends State<WakalaDetail> {
         await Dio().put('http://10.0.2.2:8000/notStillThere/$idLocation');
     }
 
+    Widget _decideImageView(String image){
+        if(image==""){
+            return Image.asset("assets/no_foto.PNG");
+        }
+        else{
+            //return Image.asset("assets/no_foto.PNG");
+            //Uint8List base64Image = 
+            return Image.memory(base64Decode(image));
+        }
+    }
+
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
@@ -88,15 +110,15 @@ class _WakalaDetailState extends State<WakalaDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                     SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: Image.asset("assets/basurero.jpeg")
+                        width: 150,
+                        height: 150,
+                        child: _decideImageView(base64Image1)
                     ),
                     const SizedBox(width:10),
                     SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: Image.asset("assets/basurero.jpeg")
+                        width: 150,
+                        height: 150,
+                        child: _decideImageView(base64Image2)
                     ),
                 ]
                 ),
